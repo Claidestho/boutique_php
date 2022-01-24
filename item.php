@@ -1,3 +1,8 @@
+
+
+<?php include './exo-template/header.php'?>
+
+
 <?php
 
 $name = "Plateau";
@@ -9,3 +14,6 @@ echo $price,"<br />", $name, "<br />", "<img src=$picture>";
 echo "<br /> Le prix est de $price euros";
 
 ?>
+
+<?php include './exo-template/footer.php'?>
+
