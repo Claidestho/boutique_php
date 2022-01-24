@@ -1,0 +1,97 @@
+.gap-5 {
+  gap: 13rem !important;
+}
+
+.test button {
+  font-family: "Times New Roman", cursive !important;
+  font-size: 32px !important;
+  color: white !important;
+}
+
+.first_title h1,
+.section_titles {
+  font-family: "Righteous", cursive !important;
+}
+
+.carousel_images {
+  width: 100%;
+  height: auto;
+}
+
+.carousel {
+  height: auto;
+  margin: auto;
+}
+
+.carousel-control-prev button,
+.carousel-control-next button {
+  border-radius: 10px !important;
+}
+
+.main_wrapper {
+  margin: auto;
+  width: 70%;
+}
+
+.wrapper_specs {
+  border-radius: 25px;
+  height: auto;
+}
+
+.button_command {
+  color: orange !important;
+}
+
+.fruits_complements a {
+  text-decoration: none;
+  color: black;
+}
+
+h1 {
+  content: "";
+  display: inline-block;
+  width: 65%;
+  border-bottom: 2px solid #efad2c;
+  margin-right: -20%;
+  margin-left: 4%;
+}
+
+.fruits_cards {
+  transition: 0.5s;
+}
+
+.fruits_cards:hover {
+  background-color: orange;
+  transform: scale(1.02);
+}
+
+.footer_right,
+.footer_center,
+.footer_left {
+  width: 210px;
+}
+
+.footer_left img {
+  margin-right: 15px;
+}
+
+.footer_wrapper {
+  max-width: 1440px;
+  margin: 25px auto 25px auto;
+  font-family: "Righteous", cursive;
+  flex-wrap: wrap;
+}
+
+.footer_wrapper hr {
+  color: rgba(239, 173, 44, 1);
+  border: 1px solid #efad2c;
+}
+
+.icons_header {
+  background-color: white;
+  border-radius: 15px;
+  padding: 5px 5px;
+}
+.icons_header img {
+  margin: 0 10px;
+}

@@ -1,0 +1,132 @@
+.corpscv {
+  width: 70%;
+  font-size: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: "Righteous", cursive;
+}
+
+/* Identité */
+.hautpagecv {
+  font-size: 24px;
+  margin-top: 8%;
+}
+
+.hautpagecv::after {
+  content: "";
+  display: inline-block;
+  width: 80.4%;
+  border-bottom: 2px solid #efad2c;
+  margin-right: -100%;
+  margin-left: 4%;
+}
+
+#photocv_ {
+  width: 80%;
+  height: auto;
+  border-radius: 40%;
+}
+
+h1 {
+  margin-right: 20%;
+  font-size: 1.6em;
+  padding-left: 8%;
+}
+
+/*  Exp - formation - hobbies - compétences */
+.identité,
+.exp_pro,
+.formation,
+.compétences,
+.hobbies {
+  background-color: #f1b849;
+  border-radius: 50px;
+  padding: 2%;
+}
+
+.exp_pro,
+.formation,
+.compétences,
+.hobbies {
+  width: 45%;
+}
+
+.bloc1,
+.bloc2 {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10%;
+  margin-bottom: 10%;
+}
+
+.h2cv {
+  text-align: center;
+  font-size: 130%;
+}
+
+.identité {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 6%;
+}
+
+.contactcv {
+  display: flex;
+  align-items: center;
+}
+
+#mailcv,
+#telcv {
+  margin-left: 2%;
+  padding-right: 6%;
+}
+
+#mailtel {
+  margin-right: 5%;
+  width: 40%;
+}
+
+.iconcv {
+  width: 27px;
+  height: 27px;
+}
+
+.tableaucv {
+  width: 90%;
+  color: white;
+}
+
+ul {
+  color: white;
+}
+
+@media screen and (max-width: 840px) {
+  .exp_pro,
+  .formation {
+    width: 100%;
+    margin-bottom: 25px;
+  }
+
+  .bloc2 {
+    flex-direction: column;
+  }
+
+  .compétences,
+  .hobbies {
+    width: 100%;
+    margin-bottom: 25px;
+  }
+
+  .bloc1 {
+    flex-direction: column;
+  }
+
+  .identité {
+    justify-content: center;
+  }
+
+  .tableaucv {
+    margin: 10px 10px;
+  }
+}

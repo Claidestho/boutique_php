@@ -1,0 +1,122 @@
+body {
+    font-family: 'Lexend Deca', sans-serif;
+}
+
+.title_page_cv {
+    font-size: 23px;
+    margin-top:60px;
+    border-bottom:2px solid #f1b849;
+    font-weight: bold;
+}
+
+/* identity block */
+
+.row {
+    max-width: 1440px;
+    width: 75vw;
+    margin-left:auto;
+    margin-right: auto;
+}
+
+.identity {
+    border-radius: 25px;
+}
+
+.mailcv span {
+    padding-left:15px;
+}
+
+
+@media (min-width: 767px) {
+    .wrapper_picture {
+        justify-content: flex-end;
+    }
+}
+
+@media (max-width: 767px) {
+    .wrapper_picture {
+        justify-content: center;
+    }
+}
+
+
+
+@media (max-width: 600px) {
+    .row {
+        margin-top: 25px;
+    }
+    .name_cv {
+        margin: 15px 0 15px 0;
+        font-size:30px;
+    }
+    .wrapper_exp, .wrapper_compétences, .wrapper_form, .wrapper_hobbies{
+        margin-top:40px;
+    }
+}
+
+@media (min-width: 600px) and (max-width: 1440px) {
+    .row {
+        margin-top: 10px;
+        width: 75vw;
+    }
+    .name_cv {
+        margin: 15px 0 15px 0;
+        font-size: calc(30px + (38 - 30) * ((100vw - 600px) / (1440 - 600)))
+    }
+
+    .wrapper_exp, .wrapper_compétences, .wrapper_form, .wrapper_hobbies{
+        margin-top:50px;
+    }
+}
+
+@media (min-width: 1440px)  {
+    .row {
+        margin-top: 45px;
+        width: 75%;
+    }
+    .wrapper_exp, .wrapper_compétences, .wrapper_form, .wrapper_hobbies{
+        margin-top:60px;
+    }
+
+    .name_cv {
+        font-size: 38px;
+    }
+}
+
+
+.cv_table {
+    padding-left: 40px;
+    padding-bottom:15px;
+    color:white;
+}
+
+.cv-category-title {
+    text-align:center;
+}
+
+.wrapper_compétences, .wrapper_hobbies, .wrapper_form, .wrapper_exp {
+    background-color: #f1b849;
+    padding: 3%;
+    border-radius: 30px;
+}
+
+.picture {
+    border-radius: 160px;
+}
+
+.cv-category-title, .name_cv {
+    font-weight:bold;
+}
+
+.cv-category-title {
+    margin-bottom:25px;
+}
+
+.wrp li {
+    padding-bottom:15px;
+    color:white;
+}
+
+.inner_wrapper_comp_hobbies{
+    margin-bottom:60px;
+}

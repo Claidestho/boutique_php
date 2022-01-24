@@ -1,0 +1,183 @@
+.titles_sections::after {
+  content: "";
+  display: inline-block;
+  width: 65%;
+  border-bottom: 2px solid #efad2c;
+  margin-right: -20%;
+  margin-left: 4%;
+}
+
+.titles_sections {
+  font-family: "Righteous", cursive;
+}
+
+.global_wrapper {
+  margin: auto;
+  width: 70%;
+}
+
+.description_catalogue {
+  text-align: center;
+}
+
+.search_form {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  font-family: "Righteous", cursive;
+  font-size: 25px;
+  align-items: center;
+}
+
+.search_title {
+  font-size: 25px;
+}
+
+.search_form input {
+  border-radius: 20px;
+  width: 550px;
+  height: 45px;
+}
+
+.filtering_title {
+  font-weight: bold;
+  font-family: "Righteous", cursive;
+}
+
+.filtering_area {
+  display: flex;
+  flex-direction: column;
+  margin: 0 25px;
+  width: 55%;
+}
+
+.products {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+  padding: 5px;
+  border-radius: 25px;
+  transition: 0.5s;
+}
+
+.products:hover {
+  background-color: orange;
+  transform: scale(1.02);
+}
+
+.products p {
+  text-align: center;
+  font-family: "Righteous", cursive;
+}
+
+.product_title {
+  font-size: 24px;
+}
+
+.product_price {
+  font-size: 16px;
+}
+
+.products img {
+  border-radius: 25px;
+}
+
+.shopping_area {
+  display: flex;
+  justify-content: space-between;
+  gap: 75px;
+  flex-wrap: wrap;
+}
+
+.main_wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.products button {
+  background-color: rgb(0, 0, 0);
+  border-radius: 25px;
+  height: 50px;
+  box-shadow: 1px 1px 1px #000;
+  color: white;
+  font-family: "Righteous", cursive;
+}
+
+.filtering_area h2 {
+  font-family: "Righteous", cursive;
+}
+
+.filtering_area label {
+  font-size: 18px;
+}
+
+.search_form input[type="search"] {
+  color: orange;
+  text-align: center;
+  font-family: "Righteous", cursive;
+  font-size: 20px;
+}
+
+.filters {
+  display: flex;
+  flex-direction: column;
+}
+
+.description_catalogue {
+  font-size: x-large;
+}
+
+.shopping_area a {
+  text-decoration: none;
+  color: #000;
+}
+@media screen and (max-width: 840px) {
+  .main_wrapper {
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .shopping_area {
+    justify-content: center;
+  }
+  .filtering_area {
+    margin-bottom: 25px;
+    margin: 0 auto 25px auto;
+    width: 100%;
+  }
+
+  .titles_sections {
+    text-align: center;
+  }
+
+  .titles_sections::after {
+    visibility: hidden;
+  }
+
+  .filters {
+    flex-direction: row;
+    margin: auto;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .fruit_origin,
+  .fruit_type,
+  .fruits_core {
+    justify-content: center;
+  }
+
+  .search_form {
+    flex-direction: column;
+    gap: 0px;
+  }
+
+  .search_form input {
+    width: 100%;
+  }
+
+  .description_catalogue {
+    font-size: x-large;
+  }
+}

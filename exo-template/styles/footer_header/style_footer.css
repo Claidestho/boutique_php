@@ -1,0 +1,137 @@
+/* Style for the header */
+
+body {
+  margin: 0;
+}
+
+.nav-item a {
+  color: #f1b849 !important;
+  font-family: "Lexend Deca" !important;
+  font-size: 24px;
+}
+
+.navbar-toggler {
+  background: white;
+}
+
+.navbar.navbar-expand-lg.navbar-light.bg-dark {
+  margin-bottom: 75px;
+}
+
+#logo-header {
+  height: auto;
+  width: 140px;
+}
+
+.container-fluid {
+  width: 1480px;
+  padding-left: 1.4%;
+}
+
+.navbar-nav {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 120%;
+}
+
+.navbar-nav.me-auto.mb-2.mb-lg-0.navbarlink {
+  font-size: 23px;
+}
+
+.icons_header {
+  display: flex;
+  justify-content: space-between;
+  width: 150px;
+  background-color: white;
+  padding: 5px 10px 5px 10px;
+  border-radius: 18px;
+}
+
+.dropdown-menu {
+  background-color: #212529;
+}
+
+.icon_hover:hover {
+  filter: invert(65%) sepia(58%) saturate(2299%) hue-rotate(360deg)
+    brightness(103%) contrast(105%);
+}
+
+/* END OF HEADER S STYLE */
+
+/* Style for the footer */
+.footer_wrapper {
+  display: flex;
+  justify-content: space-between;
+  max-width: 1440px;
+  margin: 25px auto auto auto;
+  font-family: "Righteous", cursive;
+  font-size: 18px;
+  flex-wrap: wrap;
+}
+
+.location,
+.phone_number {
+  display: flex;
+  align-items: center;
+}
+
+.location img,
+.phone_number img {
+  margin-right: 10px;
+}
+
+.footer_right p {
+  font-weight: bolder;
+}
+
+.footer_wrapper hr {
+  color: #efad2c;
+  border: 1px solid #efad2c;
+}
+
+.footer_right,
+.footer_center,
+.footer_left {
+  width: 210px;
+}
+
+.icons_social {
+  display: flex;
+  justify-content: space-between;
+}
+
+.logo_footer {
+  display: flex;
+  justify-content: center;
+}
+
+.logo_footer img {
+  width: 257px;
+  height: auto;
+}
+
+@media (max-width: 840px) {
+  .logo_footer img {
+    width: 180px;
+    height: auto;
+  }
+
+  .footer_wrapper {
+    display: flex;
+    justify-content: center;
+    max-width: 1440px;
+    margin: 25px auto 25px auto;
+    font-family: "Righteous", cursive;
+    font-size: 18px;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .footer_center,
+  .footer_right {
+    text-align: center;
+  }
+}
+/* END OF FOOTER S STYLE */

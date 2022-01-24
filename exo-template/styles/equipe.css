@@ -1,0 +1,294 @@
+h1 {
+  font-family: cursive;
+  text-align: center;
+}
+h2 {
+  font-family: cursive;
+}
+ul {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  font-family: cursive;
+  border: solid;
+  width: 100%;
+  align-items: stretch;
+  text-align: center;
+}
+hr {
+  height: 3px;
+  background-color: #f1b849;
+  border: none;
+}
+
+.values_wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.values {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  font-family: cursive;
+  border: solid;
+  width: 80%;
+  align-items: stretch;
+  text-align: center;
+}
+.audace {
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.partage {
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.respect {
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.membres_1 {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  text-align: center;
+  align-items: center;
+  justify-content: space-around;
+  font-family: cursive;
+
+  border-radius: 10px 10px 10px 10px;
+}
+
+.membres_2 {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  text-align: center;
+  align-items: center;
+  justify-content: space-around;
+  font-family: cursive;
+
+  border-radius: 10px 10px 10px 10px;
+}
+
+.membres_1 a,
+.membres_2 a {
+  text-decoration: none;
+  color: black;
+}
+
+.marguerite {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: #f1b849;
+  border: solid;
+  border-color: white;
+  border-radius: 10px 10px 10px 10px;
+  width: 600px;
+}
+.loris {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: #f1b849;
+  border: solid;
+  border-color: white;
+  border-radius: 10px 10px 10px 10px;
+  width: 600px;
+}
+.aly {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: #f1b849;
+  border: solid;
+  border-color: white;
+  border-radius: 10px 10px 10px 10px;
+  width: 600px;
+}
+.david {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: #f1b849;
+  border: solid;
+  border-color: white;
+  border-radius: 10px 10px 10px 10px;
+  width: 600px;
+}
+.text1 {
+  display: flex;
+  flex-direction: column;
+  font-weight: bold;
+}
+.text2 {
+  display: flex;
+  flex-direction: column;
+  font-weight: bold;
+}
+.text3 {
+  display: flex;
+  flex-direction: column;
+  font-weight: bold;
+}
+.text4 {
+  display: flex;
+  flex-direction: column;
+  font-weight: bold;
+}
+.France {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  text-align: center;
+  align-items: center;
+  font-family: cursive;
+}
+body {
+  margin: 0;
+}
+
+.body_equipe {
+  width: 70%;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.header_wrapper {
+  background-color: black;
+}
+
+.limit_header {
+  max-width: 1440px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+}
+
+.logo_header {
+  justify-content: flex-start;
+}
+
+.header_wrapper a {
+  color: blanchedalmond;
+  font-size: xx-large;
+  text-decoration: none;
+}
+
+.header_wrapper a:hover {
+  color: #ffa500;
+}
+.icons_header {
+  background-color: white;
+  border-radius: 15px;
+  padding: 5px 5px;
+}
+.icons_header img {
+  margin: 0 10px;
+}
+
+.icons_header img:hover {
+  filter: invert(65%) sepia(58%) saturate(2299%) hue-rotate(360deg)
+    brightness(103%) contrast(105%);
+}
+
+/* END OF HEADER S STYLE */
+
+/* Style for the footer */
+.footer_wrapper {
+  display: flex;
+  justify-content: space-between;
+  max-width: 1440px;
+  margin: auto;
+}
+
+.location,
+.phone_number {
+  display: flex;
+  align-items: center;
+  font-size: 1.1em;
+}
+
+.location img,
+.phone_number img {
+  margin-right: 10px;
+}
+
+.legal_mentions p {
+  font-weight: bolder;
+}
+
+.footer_right p {
+  font-weight: bolder;
+}
+
+.footer_wrapper hr {
+  color: #efad2c;
+  border: 1px solid #efad2c;
+}
+
+.footer_right,
+.footer_center,
+.footer_left {
+  width: 210px;
+}
+
+.icons_social {
+  display: flex;
+  justify-content: space-between;
+}
+
+.logo_footer {
+  display: flex;
+  justify-content: center;
+}
+
+.titles_sections::after {
+  content: "";
+  display: inline-block;
+  width: 80.4%;
+  border-bottom: 2px solid #efad2c;
+  margin-right: -20%;
+  margin-left: 4%;
+}
+
+.titles_sections,
+h1 {
+  font-family: "Righteous", cursive;
+}
+
+@media screen and (max-width: 840px) {
+  .audace,
+  .respect,
+  .partage {
+    flex-direction: column;
+  }
+
+  .marguerite,
+  .aly,
+  .david,
+  .loris {
+    width: 100%;
+    gap: 25px;
+  }
+}

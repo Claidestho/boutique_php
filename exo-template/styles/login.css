@@ -1,0 +1,228 @@
+body {
+  margin: 0;
+  
+}
+
+.body_equipe {
+  margin: 0 25px;
+}
+
+.header_wrapper {
+  background-color: black;
+}
+
+.limit_header {
+  max-width: 1440px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+}
+
+.logo_header {
+  justify-content: flex-start;
+}
+
+.header_wrapper a {
+  color: blanchedalmond;
+  font-size: xx-large;
+  text-decoration: none;
+}
+
+.header_wrapper a:hover {
+  color: #ffa500;
+}
+.icons_header {
+  background-color: white;
+  border-radius: 15px;
+  padding: 5px 5px;
+}
+.icons_header img {
+  margin: 0 10px;
+}
+
+.icons_header img:hover {
+  filter: invert(65%) sepia(58%) saturate(2299%) hue-rotate(360deg)
+    brightness(103%) contrast(105%);
+}
+
+/* END OF HEADER S STYLE */
+
+/* Style for the footer */
+.footer_wrapper {
+  display: flex;
+  justify-content: space-between;
+  max-width: 1440px;
+  margin: auto;
+}
+
+.location,
+.phone_number {
+  display: flex;
+  align-items: center;
+  font-size: 1.1em;
+}
+
+.location img,
+.phone_number img {
+  margin-right: 10px;
+}
+
+.legal_mentions p {
+  font-weight: bolder;
+}
+
+.footer_right p {
+  font-weight: bolder;
+}
+
+.footer_wrapper hr {
+  color: #efad2c;
+  border: 1px solid #efad2c;
+}
+
+.footer_right,
+.footer_center,
+.footer_left {
+  width: 210px;
+}
+
+.icons_social {
+  display: flex;
+  justify-content: space-between;
+}
+
+.logo_footer {
+  display: flex;
+  justify-content: center;
+}
+
+.titles_sections::after {
+  content: "";
+  display: inline-block;
+  width: 80.4%;
+  border-bottom: 2px solid #efad2c;
+  margin-right: -20%;
+  margin-left: 4%;
+}
+
+.titles_sections,
+h1 {
+  font-family: "Righteous", cursive;
+}
+
+.formulaires{
+  margin: 0;
+  font-weight: bold;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  width: 500px;
+}
+form{
+  background-color: floralwhite;
+  padding: 30px;
+  
+}
+form h1{
+  font-size: 28px;
+  font-family: "Righteous", cursive;
+}
+form .separation{
+  width: 100%;
+  height: 1px;
+  background-color: #f1b849;
+}
+form .corpform1{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  margin-bottom: 15px;
+}
+form .corpform1 .groupe{
+  position: relative;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+}
+form .corpform1 .groupe input{
+  padding: 10px 5px 10px 25px;
+  border: 1px solid #f1b849;
+  outline-color:#f1b849;
+  border-radius: 5px;
+}
+form .corpform1 .groupe i{
+  position: absolute;
+  left: 5px;
+  top: 25px;
+  padding: 4px 1px;
+  color: #455a0f;
+}
+form .piedformu1 button{
+  margin-top: 10px;
+  background-color:#f1b849 ;
+  padding: 5px 10px 5px 10px;
+  border-radius: 5px;
+  font-size: 20px;
+  border: none;
+}
+form .piedformu1 button:hover{
+  transform: scale(1,02);
+}
+form .corpform2{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin-bottom: 15px;
+  margin-top: 15px;
+}
+form .corpform2 .groupe {
+  position: relative;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+}
+form .corpform2 .groupe input{
+  padding: 10px 5px 10px 25px;
+  border: 1px solid #f1b849;
+  outline-color:#f1b849;
+  border-radius: 5px;
+}
+form .corpform2 .groupe i{
+  position: absolute;
+  left: 5px;
+  top: 25px;
+  padding: 4px 1px;
+  color: #455a0f;
+}
+form .piedformu2 button{
+  margin-top: 10px;
+  background-color:#f1b849 ;
+  padding: 5px 10px 5px 10px;
+  border-radius: 5px;
+  font-size: 20px;
+  border: none;
+
+}
+form .piedformu2 button:hover{
+    transform: scale(1,02);
+}
+.blocsignup{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+.notsign{
+  font-size: 22px;
+  font-family: "Righteous", cursive;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+.image img {
+  width: 100%;
+  height: auto;
+}
+
