@@ -5,17 +5,18 @@
             name="description"
             content="Bienvenue sur le site de Tiki's Fruits. Commandez simplement de délicieux fruits exotiques !"
     />
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="icon" href="../exo-template/src/favicon.png" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="icon" href="../exo-template/src/favicon.png"/>
     <link
             rel="stylesheet" type="text/css"
             href="./exo-template/styles/footer_header/style_footer.css"
     />
     <link rel="stylesheet" href="styles/style_index.css" type="text/css"/>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 
     <link
             href="https://fonts.googleapis.com/css2?family=Righteous&display=swap"
@@ -30,19 +31,19 @@
     <div class="container-fluid">
         <a class="navbar-brand" href="#">
             <img
-                id="logo-header"
-                src="./exo-template/src/src_footer_header/wlogo.svg"
-                alt=""
+                    id="logo-header"
+                    src="./exo-template/src/src_footer_header/wlogo.svg"
+                    alt=""
             />
         </a>
         <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
         >
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -56,12 +57,12 @@
                 </li>
                 <li class="nav-item dropdown">
                     <a
-                        class="nav-link dropdown-toggle"
-                        href="#"
-                        id="navbarDropdown"
-                        role="button"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="true"
+                            class="nav-link dropdown-toggle"
+                            href="#"
+                            id="navbarDropdown"
+                            role="button"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="true"
                     >
                         Equipe
                     </a>
@@ -95,29 +96,29 @@
                 <li class="icons_header">
                     <a href="./login.html">
                         <img
-                            class="icon_hover"
-                            src="./exo-template/src/src_footer_header/profile.png"
-                            alt="icon_profile"
-                            width="30"
-                            height="30"
+                                class="icon_hover"
+                                src="./exo-template/src/src_footer_header/profile.png"
+                                alt="icon_profile"
+                                width="30"
+                                height="30"
                         />
                     </a>
                     <a href="">
                         <img
-                            class="icon_hover"
-                            src="./exo-template/src/src_footer_header/cart.png"
-                            alt="icon_cart"
-                            width="30"
-                            height="30"
+                                class="icon_hover"
+                                src="./exo-template/src/src_footer_header/cart.png"
+                                alt="icon_cart"
+                                width="30"
+                                height="30"
                         />
                     </a>
                     <a href="">
                         <img
-                            class="icon_hover"
-                            src="./exo-template/src/src_footer_header/search.png"
-                            alt="icon_search"
-                            width="30"
-                            height="30"
+                                class="icon_hover"
+                                src="./exo-template/src/src_footer_header/search.png"
+                                alt="icon_search"
+                                width="30"
+                                height="30"
                         />
                     </a>
                 </li>
