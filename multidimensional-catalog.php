@@ -23,9 +23,24 @@ $products = [
         "image" => "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/imac-og-202008?wid=600&hei=315&fmt=jpeg&qlt=95&.v=1594849639000"
     ]
 ];
-echo "<pre>";
-print_r($products);
-echo "</pre>";
-echo "<pre>";
-var_dump($products);
-echo "</pre>";
+//echo "<pre>";
+//print_r($products);
+//echo "</pre>";
+//echo "<pre>";
+//var_dump($products);
+//echo "</pre>";
+print_r($products["iphone"]);
+
+
+
+
+
+echo "<h2>Boucle foreach</h2>";
+
+foreach ($products as $product){
+    echo "<pre>";
+    print_r($product) ;
+    echo "</pre>";
+}
+
+
