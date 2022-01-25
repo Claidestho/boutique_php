@@ -26,3 +26,6 @@ $products = [
 echo "<pre>";
 print_r($products);
 echo "</pre>";
+echo "<pre>";
+var_dump($products);
+echo "</pre>";
