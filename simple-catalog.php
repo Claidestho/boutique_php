@@ -16,7 +16,7 @@ while($i < $products_length){
     $i++;
 }
 
-echo "<h2>Boucle for</h2>";/
+echo "<h2>Boucle for</h2>";
 
 for($count = 0; $count < $products_length; $count++){
     echo "<br />",$products[$count], "<br />";
