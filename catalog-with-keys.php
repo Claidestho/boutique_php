@@ -1,4 +1,5 @@
 <?php
+include 'my-functions.php';
 
 
 $iphone = [
@@ -28,10 +29,15 @@ $imac = [
 $products = [$iphone, $ipad, $imac];
 
 for ($i = 0; $i < 3; $i++) {
+    $products[$i]["price"] = formatPrice($products[$i]["price"]);
+
+
     echo "<pre>";
     print_r($products[$i]);
     echo "</pre>";
     echo "<br />";
+
+
 }
 
 ?>

@@ -1,4 +1,5 @@
 <?php
+include 'my-functions.php';
 
 $products = [
     "iphone" => [
@@ -29,7 +30,7 @@ $products = [
 //echo "<pre>";
 //var_dump($products);
 //echo "</pre>";
-print_r($products["iphone"]);
+//print_r($products["iphone"]);
 
 
 
@@ -38,9 +39,14 @@ print_r($products["iphone"]);
 echo "<h2>Boucle foreach</h2>";
 
 foreach ($products as $product){
+    foreach ($product as $values){
+        $product["price"] = formatPrice($product["price"]);
+        break;
+    }
     echo "<pre>";
     print_r($product) ;
     echo "</pre>";
+
 }
 
 
