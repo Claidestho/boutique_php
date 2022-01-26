@@ -1,4 +1,5 @@
 <?php
+include 'my-functions.php';
 
 $products = ["iPhone", "iPad", "iMac"];
 $products_length = count($products);

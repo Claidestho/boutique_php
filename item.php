@@ -1,7 +1,7 @@
-<?php include './exo-template/header.php' ?>
-
+<?php include './exo-template/header.php'; ?>
 
 <?php
+include 'my-functions.php';
 
 $name = "Plateau";
 $price = 10;
