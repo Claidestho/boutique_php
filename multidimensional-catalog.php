@@ -71,14 +71,29 @@ $products = [
 <div class="form_space">
     <div class="form_elements">
 
-        <form method="GET">
+        <form method="GET" action="cart.php">
             <img src="<?php echo $products["pastèque"]["image"]; ?>"><br>
-            <label>Pastèque</label><br>
+            <label>Choisissez le produit désiré</label><br>
+            <select name="product">
+
+                <?php
+                foreach ($products as $key) {
+                    echo "<option value=\"{$key["name"]}\">";
+
+                }
+
+                ?>>
+                <?php foreach ($products as $key) {
+
+                    echo $key["name"] . "</option>";
+                }
+                ?>
+            </select>
             <label class="initial_price">Prix :<?php formatPrice($products["pastèque"]["price"]) ?></label><br>
             <label class="promo">PROMOTION
-                : <?php formatPrice(discountedPrice($products["pastèque"]["price"], $products["pastèque"]["discount_rate"]));?> </label>
+                : <?php formatPrice(discountedPrice($products["pastèque"]["price"], $products["pastèque"]["discount_rate"])); ?> </label>
 
-         <br>   <label for="dropdown"> Choisissez la quantité</label><br/>
+            <br> <label for="dropdown"> Choisissez la quantité</label><br/>
             <select name="quantity">
                 <?php for ($i = 0; $i < 100; $i++) : ?>
                     <option value=<?= "$i"; ?>>
