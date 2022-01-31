@@ -1,6 +1,6 @@
 <?php include './exo-template/header.php';
 include 'my-functions.php';
-include 'products-list.php';?>
+include 'products-list.php'; ?>
 <style>
 
     .form_space {
@@ -29,23 +29,23 @@ include 'products-list.php';?>
         <form method="GET" action="cart.php">
             <img src="<?php echo $products["pasteque"]["image"]; ?>"><br>
             <label>pasteque do Brazil</label><br>
-<!--            <select name="product">-->
-<!---->
-<!--                --><?php
-//                foreach ($products as $key) {
-//                    echo "<option value=\"{$key["name"]}\">" . $key["name"] . "</option>";
+<!--                        <select name="product">-->
+<!--            -->
+<!--                            --><?php
+//                            foreach ($products as $key) {
+//                                echo "<option value=\"{$key["name"]}\">" . $key["name"] . "</option>";
 //
-//                }
+//                            }
 //
-//                ?><!-->-->
-<!--            </select>-->
+//                            ?><!-->-->
+<!--                        </select>-->
             <label class="initial_price">Prix :<?php formatPrice($products["pasteque"]["price"]) ?></label><br>
             <label class="promo">PROMOTION
                 : <?php formatPrice(discountedPrice($products["pasteque"]["price"], $products["pasteque"]["discount_rate"])); ?> </label>
 
             <br> <label for="dropdown"> Choisissez la quantité</label><br/>
             <select name="quantity">
-                <?php for ($i = 0; $i < 100; $i++) : ?>
+                <?php for ($i = 1; $i < 100; $i++) : ?>
                     <option value=<?= "$i"; ?>>
                         <?= $i ?>
                     </option>
