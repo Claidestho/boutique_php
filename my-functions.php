@@ -5,7 +5,7 @@ function formatPrice($cents_price): void{
 }
 
 function priceExcludingVAT($taxed_price): float{
-    return ($taxed_price * 100) / (100 + 20);
+    return round($taxed_price / (1 + 0.2), 0);
 }
 
 function discountedPrice($original_price, $discount): float{

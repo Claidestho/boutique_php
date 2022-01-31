@@ -11,7 +11,7 @@ $products = [
 ],
 "pasteque" => [
 "name" => "Pastèque",
-"price" => 15000,
+"price" => 10000,
 "discount_rate" => 15,
 "weight" => 1200,
 "discount" => 5,

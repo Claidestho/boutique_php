@@ -56,7 +56,17 @@ include 'products-list.php';
             </tr>
             <tr>
                 <td>Remise (%)</td>
-                <td><?= $_GET["product"] ?>
+                <td><?= $products[$_GET["product"]]["discount_rate"] . "%" ?>
+                </td>
+            </tr>
+            <tr>
+                <td>Prix HT</td>
+                <td><?= formatPrice(priceExcludingVAT(discountedPrice($products[$_GET["product"]]["price"], $products[$_GET["product"]]["discount_rate"])) * $_GET["quantity"]);?>
+                </td>
+            </tr>
+            <tr>
+                <td>TVA</td>
+                <td><?= "20%" ?>
                 </td>
             </tr>
             <tr>
