@@ -74,7 +74,7 @@ include 'carrier-list.php';
             </tr>
             <tr>
                 <td>Prix HT</td>
-                <td><?php if (isset($_GET["product"])) {
+                <td><?php if (isset($_GET["product"]) && isset($_GET["quantity"])) {
                         formatPrice(priceExcludingVAT(discountedPrice($products[$_GET["product"]]["price"], $products[$_GET["product"]]["discount_rate"])) * $_GET["quantity"]);
                     } else {
                         echo "ERREUR";
@@ -91,7 +91,7 @@ include 'carrier-list.php';
             <tr>
                 <td>Prix TTC</td>
                 <td><?php
-                    if (isset($_GET["product"])) {
+                    if (isset($_GET["product"]) && isset($_GET["quantity"])) {
                         echo formatPrice(discountedPrice($products[$_GET["product"]]["price"], $products[$_GET["product"]]["discount_rate"]) * $_GET["quantity"]);
                     } else {
                         echo "ERREUR";
@@ -104,11 +104,11 @@ include 'carrier-list.php';
             </tbody>
         </table>
     </div>
-
+<?php if (isset($_GET["quantity"]) && isset($_GET["product"])) { ?>
     <h3>Choix du transporteur :</h3>
+
     <form>
         <select name="carrier">
-
             <?php
             foreach ($carriers as $key => $carrier) {
                 echo "<option value=\"{$key}\">" . $carrier["name"] . "</option>";
@@ -117,11 +117,15 @@ include 'carrier-list.php';
 
             ?>>
         </select>
-        <input type="hidden" name="product" value="<?php  echo $_GET["product"] ?>">
-        <input type="hidden" name="quantity" value="<?php echo $_GET["quantity"] ?>">
+        <input type="hidden" name="product" value="<?php echo $_GET["product"] ?>">
+        <input type="hidden" name="quantity" value="<?php
+        // Rajouter conditio IF
+        echo $_GET["quantity"] ?>">
         <input type="submit" value="Valider">
     </form><br>
+
     <div class="table">
+
         <table>
             <thead>
             <tr>
@@ -142,7 +146,7 @@ include 'carrier-list.php';
                         echo $carriers[$_GET["carrier"]]["price_over"];
                         $totalPrice = $carriers[$_GET["carrier"]]["price_over"];
                     }
-                }else{
+                } else {
                     echo "Veuillez choisir un transporteur dans la liste ci-dessus";
                 }
                 ?>
@@ -151,16 +155,14 @@ include 'carrier-list.php';
             </tr>
             <td>Prix total TTC</td>
             <td><?php
-if (isset($_GET["carrier"]) && !is_string($totalPrice)){
-    echo formatPrice(discountedPrice($products[$_GET["product"]]["price"], $products[$_GET["product"]]["discount_rate"]) * $_GET["quantity"] + $totalPrice);
-}elseif(isset($_GET["carrier"]) && is_string($totalPrice)){
+                if (isset($_GET["carrier"]) && !is_string($totalPrice) && isset($_GET["quantity"])) {
+                    echo formatPrice(discountedPrice($products[$_GET["product"]]["price"], $products[$_GET["product"]]["discount_rate"]) * $_GET["quantity"] + $totalPrice);
+                } elseif (isset($_GET["carrier"]) && is_string($totalPrice) && isset($_GET["quantity"])) {
 
-    echo formatPrice(discountedPrice($products[$_GET["product"]]["price"], $products[$_GET["product"]]["discount_rate"]) * $_GET["quantity"]);
-}
-
-else{
-    echo "Veuillez choisir un transporteur dans la liste ci-dessus";
-}
+                    echo formatPrice(discountedPrice($products[$_GET["product"]]["price"], $products[$_GET["product"]]["discount_rate"]) * $_GET["quantity"]);
+                } else {
+                    echo "Veuillez choisir un transporteur dans la liste ci-dessus";
+                }
                 ?>
 
 
@@ -169,6 +171,6 @@ else{
             </tbody>
         </table>
     </div>
-
-?>
+<?php } ?>
+    ?>
 <?php include './exo-template/footer.php' ?>
