@@ -5,21 +5,15 @@ include 'products-list.php';
 include 'carrier-list.php';
 
 $results = [];
+$subTotal = 0;
+$totalWeight = 0;
 
-foreach ($_POST["products"] as $product => $value){
-
-    if($value["quantity"] > 0){
+foreach ($_POST["products"] as $product => $value) {
+    if ($value["quantity"] > 0) {
         $results[$product] = $products[$product];
         $results[$product]["quantity"] = $value["quantity"];
-
-
     }
-
-
 }
-
-
-
 echo "<pre>";
 var_dump($results);
 echo "</pre>";
@@ -56,7 +50,7 @@ echo "</pre>";
         }
     </style>
     <h1>Récapitulatif de votre commande</h1>
-    <pre><b><?php var_dump($_POST); ?></b></pre>
+<!--    <pre><b>--><?php //var_dump($_POST); ?><!--</b></pre>-->
     <p>Voici les détails de votre commande n°<?= rand(10000, 99999) ?> du <?= date("d.m.y") . " à " . date("H:i:s") ?>
         :</p>
 
@@ -68,56 +62,63 @@ echo "</pre>";
             </tr>
             </thead>
             <tbody>
-           //FOR EACH BOUCLER SUR RESULTS
-            <tr>
-                <td>Produit commandé</td>
-                <td><?php if (isset($_POST["product"]) && is_string($_POST["product"])) {
-                        echo $products[$_POST["product"]]["name"];
-                    } else {
-                        echo "ERREUR : LE PRODUIT CHOISI N'EST PAS VALIDE";
-                    } ?></td>
-            </tr>
-            <tr>
-                <td>Quantité</td>
-                <td><?php if (isset($_POST["quantity"]) && filter_var($_POST["quantity"], FILTER_VALIDATE_INT)) {
-                        echo $_POST["quantity"];
-                    } else {
-                        echo "ERREUR : LA QUANTITÉ INDIQUÉE N'EST PAS VALIDE";
-                    } ?></td>
-            </tr>
-            <tr>
-                <td>Remise (%)</td>
-                <td><?php if (isset($_POST["product"])) {
-                        echo $products[$_POST["product"]]["discount_rate"] . "%";
-                    } else {
-                        echo "ERREUR";
-                    } ?>
-                </td>
-            </tr>
-            <tr>
-                <td>Prix HT</td>
-                <td><?php if (isset($_POST["product"]) && isset($_POST["quantity"])) {
-                        formatPrice(priceExcludingVAT(discountedPrice($products[$_POST["product"]]["price"], $products[$_POST["product"]]["discount_rate"])) * $_POST["quantity"]);
-                    } else {
-                        echo "ERREUR";
-                    }
-                    ?>
+            <?php foreach ($results as $result) { ?>
+                <tr>
+                    <td>Produit commandé</td>
+                    <td><?php if (is_string($result["name"])) {
+                            echo $result["name"];
+                        } else {
+                            echo "ERREUR : LE PRODUIT CHOISI N'EST PAS VALIDE";
+                        } ?>
+                        <input type="hidden" name="name" value="<?php $result["name"]?>">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Quantité</td>
+                    <td><?php if (filter_var($result["quantity"], FILTER_VALIDATE_INT)) {
+                            echo $result["quantity"];
+                        } else {
+                            echo "ERREUR : LA QUANTITÉ INDIQUÉE N'EST PAS VALIDE";
+                        } ?>
+                        <input type="hidden" name="quantity" value="<?php $result["quantity"]?>">
+                    </td>
+                </tr>
 
-                </td>
-            </tr>
+
+                <tr>
+                    <td>Remise (%)</td>
+                    <td><?php if (!empty($results)) {
+                            echo $result["discount_rate"] . "%";
+                        } else {
+                            echo "ERREUR";
+                        } ?>
+                        <input type="hidden" name="discount_rate" value="<?php $result["discount_rate"]?>">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Prix HT unitaire</td>
+                    <td><?php if (!empty($results)) {
+                            formatPrice(priceExcludingVAT(discountedPrice($result["price"], $result["discount_rate"]) * $result["quantity"]));
+                        } else {
+                            echo "ERREUR";
+                        }
+                        $subTotal = $subTotal + (discountedPrice($result["price"], $result["discount_rate"]) * $result["quantity"]);
+                        $totalWeight = $totalWeight + $result["weight"];
+                        ?><input type="hidden" name="price" value="<?php $result["price"]?>">
+
+                    </td>
+                </tr>
+            <?php } ?>
             <tr>
                 <td>TVA</td>
                 <td><?= "20%" ?>
                 </td>
             </tr>
             <tr>
-                <td>Prix TTC</td>
+                <td>Sous total TTC</td>
                 <td><?php
-                    if (isset($_POST["product"]) && isset($_POST["quantity"])) {
-                        echo formatPrice(discountedPrice($products[$_POST["product"]]["price"], $products[$_POST["product"]]["discount_rate"]) * $_POST["quantity"]);
-                    } else {
-                        echo "ERREUR";
-                    }
+                    echo formatPrice($subTotal);
                     ?>
 
 
@@ -126,7 +127,7 @@ echo "</pre>";
             </tbody>
         </table>
     </div>
-<?php if (isset($_POST["quantity"]) && isset($_POST["product"])) { ?>
+<?php if (!empty($results)) { ?>
     <h3>Choix du transporteur :</h3>
 
     <form>
@@ -140,9 +141,7 @@ echo "</pre>";
             ?>>
         </select>
         <input type="hidden" name="product" value="<?php echo $_POST["product"] ?>">
-        <input type="hidden" name="quantity" value="<?php
-        // Rajouter conditio IF
-        echo $_POST["quantity"] ?>">
+<!--        <input type="hidden" name="quantity" value="--><?php //$data_string;?><!--">-->
         <input type="submit" value="Valider">
     </form><br>
 
@@ -158,13 +157,13 @@ echo "</pre>";
             <td>
                 <?php
                 if (isset($_POST["carrier"])) {
-                    if ($products[$_POST["product"]]["weight"] <= 500) {
+                    if ($totalWeight <= 500) {
                         formatPrice($carriers[$_POST["carrier"]]["price_500"]);
                         $totalPrice = $carriers[$_POST["carrier"]]["price_500"];
-                    } elseif ($products[$_POST["product"]]["weight"] <= 2000) {
+                    } elseif ($totalWeight <= 2000) {
                         formatPrice($carriers[$_POST["carrier"]]["price_2000"]);
                         $totalPrice = $carriers[$_POST["carrier"]]["price_2000"];
-                    } elseif ($products[$_POST["product"]]["weight"] > 2001) {
+                    } elseif ($totalWeight > 2001) {
                         echo $carriers[$_POST["carrier"]]["price_over"];
                         $totalPrice = $carriers[$_POST["carrier"]]["price_over"];
                     }
