@@ -8,8 +8,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v1
-
       - name: Executing remote command
         uses: appleboy/ssh-action@master
         with:
@@ -18,4 +16,6 @@ jobs:
           PORT: ${{ secrets.PORT }}
           KEY: ${{ secrets.SSHKEY }}
           PASSPHRASE: ${{ secrets.PASSPHRASE }}
-          script: cd /var/www/html/boutique_php & git pull
+          script: |
+            cd /var/www/html/boutique_php
+            git pull
