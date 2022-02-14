@@ -1,6 +1,7 @@
 <?php include './exo-template/header.php';
 include 'my-functions.php';
 include 'products-list.php'; ?>
+
 <style>
 
     .form_space {
