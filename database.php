@@ -61,10 +61,9 @@ function deleteCustomersNoOrders($database)
 
 }
 
-function insertNewCustomer($database, $id, $price, $name, $avalaible, $description, $weight, $img, $quantity, $cat)
+function insertNewCustomer($database, $price, $name, $avalaible, $description, $weight, $img, $quantity, $cat)
 {
-    $function_result = $database->prepare('INSERT INTO `products` (id, price, name, avalaible, description, weight, image_url, quantity, category_id, productscol) VALUES (:id, :price, :name, :avalaible, :description, :weight, :img, :quantity, :cat, "")');
-    $function_result->bindParam('id', $id, PDO::PARAM_INT);
+    $function_result = $database->prepare('INSERT INTO `products` (price, name, avalaible, description, weight, image_url, quantity, category_id, productscol) VALUES (:price, :name, :avalaible, :description, :weight, :img, :quantity, :cat, "")');
     $function_result->bindParam('price', $price, PDO::PARAM_STR_CHAR);
     $function_result->bindParam('name', $name, PDO::PARAM_STR_CHAR);
     $function_result->bindParam('avalaible', $avalaible, PDO::PARAM_INT);
