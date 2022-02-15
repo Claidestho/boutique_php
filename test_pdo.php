@@ -1,14 +1,19 @@
 <?php include 'database.php' ?>
     <style>
 
-        .form_space {
+        .catalog {
+            display: flex;
+            justify-content: center;
+        }
+
+        .order_area {
             display: flex;
             justify-content: center;
             font-size: larger;
-            flex-direction: row-reverse;
+            flex-direction: column;
         }
 
-        form img {
+        img {
             width: 200px;
             height: 200px;
             border-radius: 50%;
@@ -29,6 +34,43 @@ try {
     die('Erreur : ' . $e->getMessage());
 }
 ?>
+<?php
+
+$products = displayAllProducts($db);
+
+//foreach ($products as $value => $item){
+//    echo "<img src=$item[image_url]>";
+//    echo $item["price"] . "<br>";
+//    echo $item['name'];
+//}
+
+?>
+
+<form method="POST" action="http://ptsv2.com/t/bonjour/post">
+<?php foreach ($products as $value => $item) { ?>
+    <div class="catalog">
+        <div class="order_area">
+            <img src=<?php echo ucfirst($item['image_url']) ?>>
+            <h3><?php echo ucfirst($item['name']) ?></h3>
+            <p>Price : <?php echo $item['price'] ?> </p>
+            <p>Poids : <?php echo $item['weight'] ?></p>
+            <p>Disponibilité : <?php echo $item['avalaible'] ?></p>
+            <p>Quantité disponible : <?php echo $item['quantity'] ?></p>
+            <select name="order_quantity">
+                <?php for ($i = 0; $i < 100; $i++) : ?>
+                    <option value=<?= "$i"; ?>>
+                        <?= $i ?>
+                    </option>
+                <?php endfor; ?>
+            </select>
+            <input type="hidden" name=<?php echo ucfirst($item['name'])?> value=<?php echo ucfirst($item['name'])?>
+        </div>
+    </div>
+
+<?php } ?>
+    <input type="submit">
+</form>
+
 <?php
 if (isset($_POST) && !empty($_POST)) {
     insertNewCustomer($db, $_POST["price"], $_POST["name"], $_POST["avalaible"], $_POST["description"], $_POST["weight"], $_POST["image_url"], $_POST["quantity"], $_POST["category_id"]);

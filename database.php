@@ -17,7 +17,7 @@ WHERE orders.id = 1'
 function displayAllProducts($database)
 {
     $function_result = $database->prepare('SELECT *
-FROM products;
+FROM products LIMIT 5
 '
     );
     $function_result->execute();
@@ -74,4 +74,6 @@ function insertNewCustomer($database, $price, $name, $avalaible, $description, $
     $function_result->bindParam('cat', $cat, PDO::PARAM_STR_CHAR);
     $function_result->execute();
 }
+
+
 
