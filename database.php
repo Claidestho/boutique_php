@@ -75,5 +75,17 @@ function insertNewCustomer($database, $price, $name, $avalaible, $description, $
     $function_result->execute();
 }
 
+function dbExtractProduct($database, $id){
+    $function_result = $database->prepare('
+SELECT name, price, discount_rate, weight, discount
+FROM products
+WHERE id = :identifier
+');
+    $function_result->bindValue('identifier', $id);
+    $function_result->execute();
+    $result = $function_result->fetchAll();
+    return $result;
+
+}
 
 

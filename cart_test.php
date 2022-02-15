@@ -4,16 +4,43 @@ include 'my-functions.php';
 include 'database.php';
 include 'carrier-list.php';
 
-$results = [];
-$subTotal = 0;
-$totalWeight = 0;
 
-foreach ($_POST["products"] as $product => $value) {
-    if ($value["quantity"] > 0) {
-        $results[$product] = $products[$product];
-        $results[$product]["quantity"] = $value["quantity"];
-    }
+try {
+    $db = new PDO('mysql:host=127.0.0.1;dbname=test;charset=utf8', 'lolo', 'bonjour38', [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+} catch (Exception $e) {
+    die('Erreur : ' . $e->getMessage());
 }
+
+//echo "<pre>";
+
+//echo "</pre>";
+$results = [];
+
+foreach ($_POST as $item => $value){
+    echo "<pre>";
+    var_dump($value);
+    echo "</pre>";
+    $results = dbExtractProduct($db, 3);
+
+}
+
+echo "<pre>";
+var_dump($results);
+echo "</pre>";
+
+////echo "<pre>";
+////var_dump($_POST);
+////echo "</pre>";
+//$results = [];
+//$subTotal = 0;
+//$totalWeight = 0;
+//
+//foreach ($_POST["products"] as $product => $value) {
+//    if ($value["quantity"] > 0) {
+//        $results[$product] = $products[$product];
+//        $results[$product]["quantity"] = $value["quantity"];
+//    }
+//}
 
 
 ?>
@@ -159,7 +186,7 @@ foreach ($_POST["products"] as $product => $value) {
                         formatPrice($carriers[$_POST["carrier"]]["price_500"]);
                         $totalPrice = $carriers[$_POST["carrier"]]["price_500"];
                     } elseif ($totalWeight <= 2000) {
-                        formatPrice($carriers[$_POST["carrier"]]["price_2000"]);
+                        formatPrice(deliveryFees($carriers[$_POST["carrier"]]["price_500"]));
                         $totalPrice = $carriers[$_POST["carrier"]]["price_2000"];
                     } elseif ($totalWeight > 2001) {
                         echo $carriers[$_POST["carrier"]]["price_over"];

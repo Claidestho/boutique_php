@@ -63,7 +63,7 @@ $products = displayAllProducts($db);
                     </option>
                 <?php endfor; ?>
             </select>
-            <input type="hidden" name=<?php echo ucfirst($item['name'])?> value=<?php echo ucfirst($item['name'])?>
+
         </div>
     </div>
 

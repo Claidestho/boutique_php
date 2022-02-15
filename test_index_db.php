@@ -10,11 +10,15 @@ try {
 }
 
 $products = displayAllProducts($db);
+
+echo "<pre>";
+var_dump($products);
+echo "</pre>";
+echo $products[0]["id"];
+
 ?>
 
-
 <style>
-
     .form_space {
         display: flex;
         justify-content: center;
@@ -37,12 +41,12 @@ $products = displayAllProducts($db);
     }
 </style>
 <div class="form_space">
-<form method="POST" action="cart_test.php">
+    <form method="POST" action="cart_test.php">
 
-<?php foreach ($products as $product => $value) { ?>
+        <?php foreach ($products as $product => $value) { ?>
 
 
-        <div class="form_elements">
+            <div class="form_elements">
 
 
                 <img src="<?php echo $value["image"]; ?>"><br>
@@ -52,23 +56,21 @@ $products = displayAllProducts($db);
                     : <?php formatPrice(discountedPrice($value["price"], $value["discount_rate"])); ?> </label>
 
                 <br> <label for="dropdown"> Choisissez la quantité</label><br/>
-                <select name="products[<?= $product ?>][quantity]">
+                <select name="quantity[]">
                     <?php for ($i = 0; $i < 100; $i++) : ?>
                         <option value=<?= "$i"; ?>>
                             <?= $i ?>
                         </option>
                     <?php endfor; ?>
                 </select>
-                <input type="hidden" name="<?= $value["name"] ?>" value="<?= $value ?>">
+                <input name="id[]" value=<?php echo $value["id"] ?> type="hidden">
+
+            </div>
 
 
-        </div>
-
-
-
-<?php } ?>
-    <input type="submit" value="Commander">
-</form>
+        <?php } ?>
+        <input type="submit" value="Commander">
+    </form>
 
 </div>
 <?php include './exo-template/footer.php'; ?>
