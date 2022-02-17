@@ -4,17 +4,17 @@ include 'database.php'; ?>
 
 <?php
 try {
-    $db = new PDO('mysql:host=127.0.0.1;dbname=test;charset=utf8', 'lolo', 'bonjour38', [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+    $db = new PDO('mysql:host=127.0.0.1;dbname=boutique_php;charset=utf8', 'lolo', 'bonjour38', [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
 } catch (Exception $e) {
     die('Erreur : ' . $e->getMessage());
 }
 
 $products = displayAllProducts($db);
 
-echo "<pre>";
-var_dump($products);
-echo "</pre>";
-echo $products[0]["id"];
+
+//echo "<pre>";
+//var_dump($products);
+//echo "</pre>";
 
 ?>
 
@@ -24,6 +24,14 @@ echo $products[0]["id"];
         justify-content: center;
         font-size: larger;
         flex-direction: row-reverse;
+    }
+
+    .form_elements{
+        text-align: center;
+        margin-bottom: 50px;
+        border: 1px grey solid;
+        border-radius: 25%;
+        padding: 10%;
     }
 
     form img {
@@ -42,18 +50,27 @@ echo $products[0]["id"];
 </style>
 <div class="form_space">
     <form method="POST" action="cart_test.php">
+<?php print_r(array_keys($products)) ?>
+        <?php foreach ($products as $key => $product) { ?>
+        <?php
 
-        <?php foreach ($products as $product => $value) { ?>
 
+
+
+
+            ?>
 
             <div class="form_elements">
 
 
-                <img src="<?php echo $value["image"]; ?>"><br>
-                <label><?php echo $value["name"]; ?></label><br>
-                <label class="initial_price">Prix :<?php formatPrice($value["price"]) ?></label><br>
-                <label class="promo">PROMOTION
-                    : <?php formatPrice(discountedPrice($value["price"], $value["discount_rate"])); ?> </label>
+                <img src="<?php echo $product["image_url"]; ?>"><br>
+                <label><?php echo "<b>" . ucfirst($product["name"]) . "</b>"; ?></label><br>
+                <label class="initial_price">Prix :<?php formatPrice($product["price"]) ?></label><br>
+               <b><label class="promo">PROMOTION
+                    : </label></b> <br>
+                    <label><?php formatPrice(discountedPrice($product["price"], $product["discount_rate"])); ?> </label><br>
+                <label><b>Description :</b> </label><br>
+                <p><?php echo $product["description"]; ?></p>
 
                 <br> <label for="dropdown"> Choisissez la quantité</label><br/>
                 <select name="quantity[]">
@@ -63,7 +80,7 @@ echo $products[0]["id"];
                         </option>
                     <?php endfor; ?>
                 </select>
-                <input name="id[]" value=<?php echo $value["id"] ?> type="hidden">
+                <input name="id[]" value=<?php echo $product["id"] ?> type="hidden">
 
             </div>
 

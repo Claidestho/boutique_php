@@ -21,7 +21,7 @@ FROM products LIMIT 5
 '
     );
     $function_result->execute();
-    $result = $function_result->fetchAll();
+    $result = $function_result->fetchAll(PDO::FETCH_ASSOC);
     return $result;
 
 }
@@ -77,11 +77,22 @@ function insertNewCustomer($database, $price, $name, $avalaible, $description, $
 
 function dbExtractProduct($database, $id){
     $function_result = $database->prepare('
-SELECT name, price, discount_rate, weight, discount
+SELECT *
 FROM products
 WHERE id = :identifier
 ');
     $function_result->bindValue('identifier', $id);
+    $function_result->execute();
+    $result = $function_result->fetch(PDO::FETCH_ASSOC);
+    return $result;
+
+}
+
+function displayCarriers($database){
+    $function_result = $database->prepare('
+SELECT *
+FROM carriers
+');
     $function_result->execute();
     $result = $function_result->fetchAll();
     return $result;
