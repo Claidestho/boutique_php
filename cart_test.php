@@ -1,17 +1,31 @@
 <?php
+session_start();
 include './exo-template/header.php';
 include 'my-functions.php';
 include 'database.php';
 include 'carrier-list.php';
-
 
 try {
     $db = new PDO('mysql:host=127.0.0.1;dbname=boutique_php;charset=utf8', 'lolo', 'bonjour38', [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
 } catch (Exception $e) {
     die('Erreur : ' . $e->getMessage());
 }
+
+$_SESSION = array_merge($_SESSION, $_POST);
+
+
+
+echo "<pre>";
+var_dump($_SESSION);
+echo "</pre>";
 $subTotal = 0;
 $totalWeight = 0;
+
+
+
+//echo "<pre>";
+//var_dump($_POST);
+//echo "</pre>";
 
 
 ?>
@@ -73,7 +87,8 @@ for ($i = 0; $i < count($_POST['quantity']); $i++) {
             </thead>
             <tbody>
 
-            <?php foreach ($results as $key => $result) { ?>
+            <?php if(isset($_SESSION['quantity'])){
+            foreach ($results as $key => $result) { ?>
             <?php if($_POST["quantity"][$key] > 0){ ?>
                 <tr>
                     <td><b>Produit commandé</b></td>
@@ -160,6 +175,7 @@ if (!empty($results)) { ?>
             ?>>
         </select>
         <input type="hidden" name="weight" value="<?= $totalWeight ?>">
+        <input type="hidden" value="<?php $_POST ?>">
         <input type="submit" value="Valider">
     </form><br>
 
@@ -175,13 +191,13 @@ if (!empty($results)) { ?>
             <td>
                 <?php
                 if (isset($_POST["carrier"])) {
-                    if ($totalWeight <= 500) {
-                        formatPrice($carriers[$_POST["carrier"]]["price_500"]);
+                    if ($_POST['weight'] <= 500) {
+                        echo $carriers[$_POST['carrier']];
                         $totalPrice = $carriers[$_POST["carrier"]]["price_500"];
-                    } elseif ($totalWeight <= 2000) {
+                    } elseif ($_POST['weight'] <= 2000) {
                         formatPrice(deliveryFees($carriers[$_POST["carrier"]]["price_500"]));
                         $totalPrice = $carriers[$_POST["carrier"]]["price_2000"];
-                    } elseif ($totalWeight > 2001) {
+                    } elseif ($_POST['weight'] > 2001) {
                         echo $carriers[$_POST["carrier"]]["price_over"];
                         $totalPrice = $carriers[$_POST["carrier"]]["price_over"];
                     }

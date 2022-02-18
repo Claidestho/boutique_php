@@ -1,4 +1,6 @@
-<?php include './exo-template/header.php';
+<?php
+session_start();
+include './exo-template/header.php';
 include 'my-functions.php';
 include 'database.php'; ?>
 
@@ -8,7 +10,9 @@ try {
 } catch (Exception $e) {
     die('Erreur : ' . $e->getMessage());
 }
-
+echo "<pre>";
+var_dump($_SESSION);
+echo "</pre>";
 $products = displayAllProducts($db);
 
 
@@ -17,7 +21,8 @@ $products = displayAllProducts($db);
 //echo "</pre>";
 
 ?>
-
+<button>Ajouter un produit</button>
+<button>Supprimer un produit</button>
 <style>
     .form_space {
         display: flex;
