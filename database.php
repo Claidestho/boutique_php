@@ -83,8 +83,7 @@ WHERE id = :identifier
 ');
     $function_result->bindValue('identifier', $id);
     $function_result->execute();
-    $result = $function_result->fetch(PDO::FETCH_ASSOC);
-    return $result;
+    return $function_result->fetch(PDO::FETCH_ASSOC);
 
 }
 
@@ -99,4 +98,10 @@ FROM carriers
 
 }
 
-
+function createOrder($database, $quantity, $order_id, $product_id){
+    $function_result = $database->prepare('INSERT INTO `order_product` (product_id, quantity, order_id) VALUES (:product_id, :quantity, :order_id)');
+    $function_result->bindParam('quantity', $quantity, PDO::PARAM_INT);
+    $function_result->bindParam('order_id', $order_id, PDO::PARAM_INT);
+    $function_result->bindParam('product_id', $product_id, PDO::PARAM_INT);
+    $function_result->execute();
+}

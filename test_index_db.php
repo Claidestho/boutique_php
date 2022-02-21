@@ -2,20 +2,34 @@
 session_start();
 include './exo-template/header.php';
 include 'my-functions.php';
-include 'database.php'; ?>
+include 'database.php';
+include './class/item.php';
+include './class/catalog.php';
+?>
 
 <?php
 try {
-    $db = new PDO('mysql:host=127.0.0.1;dbname=boutique_php;charset=utf8', 'lolo', 'bonjour38', [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+    $db = new PDO('mysql:host=127.0.0.1;dbname=boutique_php;charset=utf8', 'root', '', [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
 } catch (Exception $e) {
     die('Erreur : ' . $e->getMessage());
 }
-echo "<pre>";
-var_dump($_SESSION);
-echo "</pre>";
+//echo "<pre>";
+//var_dump($_SESSION);
+//echo "</pre>";
+
 $products = displayAllProducts($db);
 
 
+
+
+$items = new Item();
+$catalogue = new Catalog($db);
+
+
+
+
+echo '<br>';
+echo '<br>';
 //echo "<pre>";
 //var_dump($products);
 //echo "</pre>";
@@ -31,7 +45,7 @@ $products = displayAllProducts($db);
         flex-direction: row-reverse;
     }
 
-    .form_elements{
+    .form_elements {
         text-align: center;
         margin-bottom: 50px;
         border: 1px grey solid;
@@ -55,15 +69,21 @@ $products = displayAllProducts($db);
 </style>
 <div class="form_space">
     <form method="POST" action="cart_test.php">
-<?php print_r(array_keys($products)) ?>
+
+
+
         <?php foreach ($products as $key => $product) { ?>
-        <?php
+            <?php
+            $items->setName($product["name"]);
+            $items->setDescription($product["description"]);
+            $items->setPrice(100);
+            $items->setImageUrl($product["image_url"]);
+            $items->setWeight(1200);
+            $items->setQuantity(5);
+            $items->setAvalaible($product["avalaible"]);
+            $items->setDiscountRate($product["discount_rate"]);
 
-
-
-
-
-            ?>
+            ?>  <?php displayCatalogue($catalogue); ?>
 
             <div class="form_elements">
 
@@ -71,9 +91,9 @@ $products = displayAllProducts($db);
                 <img src="<?php echo $product["image_url"]; ?>"><br>
                 <label><?php echo "<b>" . ucfirst($product["name"]) . "</b>"; ?></label><br>
                 <label class="initial_price">Prix :<?php formatPrice($product["price"]) ?></label><br>
-               <b><label class="promo">PROMOTION
-                    : </label></b> <br>
-                    <label><?php formatPrice(discountedPrice($product["price"], $product["discount_rate"])); ?> </label><br>
+                <b><label class="promo">PROMOTION
+                        : </label></b> <br>
+                <label><?php formatPrice(discountedPrice($product["price"], $product["discount_rate"])); ?> </label><br>
                 <label><b>Description :</b> </label><br>
                 <p><?php echo $product["description"]; ?></p>
 

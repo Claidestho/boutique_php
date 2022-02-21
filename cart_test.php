@@ -6,14 +6,12 @@ include 'database.php';
 include 'carrier-list.php';
 
 try {
-    $db = new PDO('mysql:host=127.0.0.1;dbname=boutique_php;charset=utf8', 'lolo', 'bonjour38', [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+    $db = new PDO('mysql:host=127.0.0.1;dbname=boutique_php;charset=utf8', 'root', '', [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
 } catch (Exception $e) {
     die('Erreur : ' . $e->getMessage());
 }
 
 $_SESSION = array_merge($_SESSION, $_POST);
-
-
 
 echo "<pre>";
 var_dump($_SESSION);
@@ -157,7 +155,7 @@ for ($i = 0; $i < count($_POST['quantity']); $i++) {
     </div>
 
 
-<?php
+<?php }
 
 $carriers = displayCarriers($db);
 

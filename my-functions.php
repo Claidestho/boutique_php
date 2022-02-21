@@ -1,4 +1,5 @@
 <?php
+include './class/catalog.php';
 
 function formatPrice($cents_price): void
 {
@@ -22,6 +23,9 @@ function deliveryFees($baseFees)
     return $baseFees + ($baseFees * 0.1);
 }
 
-function convertWeight($weight){
+function convertWeight($weight)
+{
     return $weight / 100;
 }
+
+
