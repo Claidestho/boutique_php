@@ -1,8 +1,8 @@
 <?php
-include './exo-template/header.php';
-include 'my-functions.php';
-include 'products-list.php';
-include 'carrier-list.php';
+include_once './exo-template/header.php';
+include_once 'my-functions.php';
+include_once 'products-list.php';
+include_once 'carrier-list.php';
 
 $results = [];
 $subTotal = 0;

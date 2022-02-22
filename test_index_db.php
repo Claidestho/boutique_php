@@ -1,15 +1,15 @@
 <?php
 session_start();
 include './exo-template/header.php';
-include 'my-functions.php';
-include 'database.php';
-include './class/item.php';
-include './class/catalog.php';
+include_once 'my-functions.php';
+include_once 'database.php';
+include_once './class/item.php';
+include_once './class/catalog.php';
 ?>
 
 <?php
 try {
-    $db = new PDO('mysql:host=127.0.0.1;dbname=boutique_php;charset=utf8', 'root', '', [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+    $db = new PDO('mysql:host=127.0.0.1;dbname=test;charset=utf8', 'root', '', [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
 } catch (Exception $e) {
     die('Erreur : ' . $e->getMessage());
 }
@@ -22,8 +22,7 @@ $products = displayAllProducts($db);
 
 
 
-$items = new Item();
-$catalogue = new Catalog($db);
+$catalogue = new Catalog();
 
 
 
@@ -54,8 +53,8 @@ echo '<br>';
     }
 
     form img {
-        width: 200px;
-        height: 200px;
+        width: 150px;
+        height: 150px;
         border-radius: 50%;
     }
 
@@ -70,50 +69,45 @@ echo '<br>';
 <div class="form_space">
     <form method="POST" action="cart_test.php">
 
+        <?php echo displayCatalogue($catalogue); ?>
 
 
-        <?php foreach ($products as $key => $product) { ?>
-            <?php
-            $items->setName($product["name"]);
-            $items->setDescription($product["description"]);
-            $items->setPrice(100);
-            $items->setImageUrl($product["image_url"]);
-            $items->setWeight(1200);
-            $items->setQuantity(5);
-            $items->setAvalaible($product["avalaible"]);
-            $items->setDiscountRate($product["discount_rate"]);
-
-            ?>  <?php displayCatalogue($catalogue); ?>
-
-            <div class="form_elements">
-
-
-                <img src="<?php echo $product["image_url"]; ?>"><br>
-                <label><?php echo "<b>" . ucfirst($product["name"]) . "</b>"; ?></label><br>
-                <label class="initial_price">Prix :<?php formatPrice($product["price"]) ?></label><br>
-                <b><label class="promo">PROMOTION
-                        : </label></b> <br>
-                <label><?php formatPrice(discountedPrice($product["price"], $product["discount_rate"])); ?> </label><br>
-                <label><b>Description :</b> </label><br>
-                <p><?php echo $product["description"]; ?></p>
-
-                <br> <label for="dropdown"> Choisissez la quantité</label><br/>
-                <select name="quantity[]">
-                    <?php for ($i = 0; $i < 100; $i++) : ?>
-                        <option value=<?= "$i"; ?>>
-                            <?= $i ?>
-                        </option>
-                    <?php endfor; ?>
-                </select>
-                <input name="id[]" value=<?php echo $product["id"] ?> type="hidden">
-
-            </div>
-
-
-        <?php } ?>
         <input type="submit" value="Commander">
     </form>
 
 </div>
 <?php include './exo-template/footer.php'; ?>
 
+
+
+    <!--        --><?php //foreach ($products as $key => $product) { ?>
+    <!--            --><?php
+    //
+    //            ?><!--  -->
+    <!---->
+    <!--            <div class="form_elements">-->
+    <!---->
+    <!---->
+    <!--                <img src="--><?php //echo $product["image_url"]; ?><!--"><br>-->
+    <!--                <label>--><?php //echo "<b>" . ucfirst($product["name"]) . "</b>"; ?><!--</label><br>-->
+    <!--                <label class="initial_price">Prix :--><?php //formatPrice($product["price"]) ?><!--</label><br>-->
+    <!--                <b><label class="promo">PROMOTION-->
+    <!--                        : </label></b> <br>-->
+    <!--                <label>--><?php //formatPrice(discountedPrice($product["price"], $product["discount_rate"])); ?><!-- </label><br>-->
+    <!--                <label><b>Description :</b> </label><br>-->
+    <!--                <p>--><?php //echo $product["description"]; ?><!--</p>-->
+    <!---->
+                    <br> <label for="dropdown"> Choisissez la quantité</label><br/>
+                    <select name="quantity[]">
+                        <?php for ($i = 0; $i < 100; $i++) : ?>
+                            <option value=<?= "$i"; ?>>
+                                <?= $i ?>
+                            </option>
+                        <?php endfor; ?>
+                    </select>
+    <!--                <input name="id[]" value=--><?php //echo $product["id"] ?><!-- type="hidden">-->
+    <!---->
+    <!--            </div>-->
+    <!---->
+    <!---->
+    <!--        --><?php //} ?>

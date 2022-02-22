@@ -8,8 +8,9 @@ protected int $price;
 protected string $imageUrl;
 protected int $weight;
 protected int $quantity;
-protected bool $avalaible;
+protected int $avalaible = 0;
 protected int $discount_rate;
+protected int $id;
 
 /**
 * @return string
@@ -138,6 +139,25 @@ public function setDiscountRate(int $discount_rate): void
 {
 $this->discount_rate = $discount_rate;
 }
+
+/**
+ * @return int
+ */
+public function getId(): int
+{
+    return $this->id;
+}
+
+    /**
+     * @param int $id
+     */
+    public function setId(int $id): void
+    {
+        $this->id = $id;
+    }
+
+
+
 
 }
 

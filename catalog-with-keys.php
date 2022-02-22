@@ -1,5 +1,5 @@
 <?php
-include 'my-functions.php';
+include_once 'my-functions.php';
 
 
 $iphone = [

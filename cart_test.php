@@ -1,12 +1,12 @@
 <?php
 session_start();
-include './exo-template/header.php';
-include 'my-functions.php';
-include 'database.php';
-include 'carrier-list.php';
+include_once './exo-template/header.php';
+include_once 'my-functions.php';
+include_once 'database.php';
+include_once 'carrier-list.php';
 
 try {
-    $db = new PDO('mysql:host=127.0.0.1;dbname=boutique_php;charset=utf8', 'root', '', [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+    $db = new PDO('mysql:host=127.0.0.1;dbname=test;charset=utf8', 'root', '', [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
 } catch (Exception $e) {
     die('Erreur : ' . $e->getMessage());
 }

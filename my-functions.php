@@ -1,9 +1,9 @@
 <?php
-include './class/catalog.php';
+include_once './class/catalog.php';
 
-function formatPrice($cents_price): void
+function formatPrice($cents_price): string
 {
-    echo $cents_price / 1000 . "€";
+    return $cents_price / 100 . "€";
 }
 
 function priceExcludingVAT($taxed_price): float
@@ -28,4 +28,34 @@ function convertWeight($weight)
     return $weight / 100;
 }
 
+function displayItem(Item $item)
+{
 
+    $avalaible = '';
+    if ($item->isAvalaible()) {
+        $avalaible = "OUI";
+    } else {
+        $avalaible = "NON";
+    }
+
+    $html = "<div class='items'><img src=" . $item->getImageUrl() .
+        "><br><label><br>" . $item->getName() . "</label><br>
+           <label>Prix : </label><label>" . formatPrice($item->getPrice()) . "</label><br>
+           <label>Poids :</label>" . convertWeight($item->getWeight()) . "<br>
+           <label> Stock : </label>" . $item->getQuantity() . "<br>
+           <label>Dispo : </label>" . $avalaible . "
+           <br> <label for='dropdown'> Choisissez la quantité</label><br/>
+       <select name='quantity[]'>";
+
+    for ($i = 0; $i < 100; $i++) {
+        $html .= "<option value=" . $i . ">" . $i . "</option>";
+    }
+
+    $html .= "</select></div><input name='id[]' value=". $item->getId() . " type='hidden'>";
+
+    return $html;
+
+
+}
+
+//" . . "
