@@ -22,14 +22,10 @@ foreach ($_SESSION['quantity'] as $amount) {
     }
 }
 
-echo "<pre>";
-var_dump($noProducts);
-echo "</pre>";
 
-
-echo "<pre>";
-var_dump($_SESSION);
-echo "</pre>";
+//echo "<pre>";
+//var_dump($_SESSION);
+//echo "</pre>";
 $subTotal = 0;
 $totalWeight = 0;
 
@@ -72,6 +68,10 @@ $totalWeight = 0;
 
         th {
             text-align: center;
+        }
+
+        .total {
+            background-color: grey;
         }
 
 
@@ -182,9 +182,9 @@ $totalWeight = 0;
 
 $carriers = displayCarriers($db);
 
-echo "<pre>";
-var_dump($carriers);
-echo "</pre>";
+//echo "<pre>";
+//var_dump($carriers);
+//echo "</pre>";
 
 if ($noProducts) { ?>
     <h3>Choix du transporteur :</h3>
@@ -253,17 +253,14 @@ if ($noProducts) { ?>
                     </td>
                 </tr>
                 <tr>
-                    <td>Prix total TTC</td>
-                    <td><?php
+                    <td class="total"><b>Prix total TTC</b></td>
+                    <td class="total"><b><?php
                         if (isset($_SESSION["carrier"]) && !is_string($totalPrice) && isset($_SESSION["quantity"])) {
-                            echo formatPrice(discountedPrice($results[$_POST["product"]]["price"], $results[$_POST["product"]]["discount_rate"]) * $_POST["quantity"] + $totalPrice);
-                        } elseif (isset($_POST["carrier"]) && is_string($totalPrice) && isset($_POST["quantity"])) {
-
-                            echo formatPrice(discountedPrice($results[$_POST["product"]]["price"], $results[$_POST["product"]]["discount_rate"]) * $_POST["quantity"]);
+                            echo formatPrice($subTotal + $totalPrice);
                         } else {
                             echo "Veuillez choisir un transporteur dans la liste ci-dessus";
                         }
-                        ?>
+                        ?></b>
 
 
                     </td>

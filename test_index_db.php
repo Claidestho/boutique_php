@@ -13,25 +13,11 @@ try {
 } catch (Exception $e) {
     die('Erreur : ' . $e->getMessage());
 }
-echo "<pre>";
-var_dump($_SESSION);
-echo "</pre>";
 
 $products = displayAllProducts($db);
-
-
-
-
 $catalogue = new Catalog();
 
 
-
-
-echo '<br>';
-echo '<br>';
-//echo "<pre>";
-//var_dump($products);
-//echo "</pre>";
 
 ?>
 <button>Ajouter un produit</button>
@@ -78,25 +64,6 @@ echo '<br>';
 </div>
 <?php include './exo-template/footer.php'; ?>
 
-
-
-    <!--        --><?php //foreach ($products as $key => $product) { ?>
-    <!--            --><?php
-    //
-    //            ?><!--  -->
-    <!---->
-    <!--            <div class="form_elements">-->
-    <!---->
-    <!---->
-    <!--                <img src="--><?php //echo $product["image_url"]; ?><!--"><br>-->
-    <!--                <label>--><?php //echo "<b>" . ucfirst($product["name"]) . "</b>"; ?><!--</label><br>-->
-    <!--                <label class="initial_price">Prix :--><?php //formatPrice($product["price"]) ?><!--</label><br>-->
-    <!--                <b><label class="promo">PROMOTION-->
-    <!--                        : </label></b> <br>-->
-    <!--                <label>--><?php //formatPrice(discountedPrice($product["price"], $product["discount_rate"])); ?><!-- </label><br>-->
-    <!--                <label><b>Description :</b> </label><br>-->
-    <!--                <p>--><?php //echo $product["description"]; ?><!--</p>-->
-    <!---->
                     <br> <label for="dropdown"> Choisissez la quantité</label><br/>
                     <select name="quantity[]">
                         <?php for ($i = 0; $i < 100; $i++) : ?>
@@ -105,9 +72,9 @@ echo '<br>';
                             </option>
                         <?php endfor; ?>
                     </select>
-    <!--                <input name="id[]" value=--><?php //echo $product["id"] ?><!-- type="hidden">-->
-    <!---->
-    <!--            </div>-->
-    <!---->
-    <!---->
-    <!--        --><?php session_destroy(); ?>
+
+
+<?php
+// Need to change this behavior -> find a way to destroy only the carrier / weight array
+session_destroy();
+?>
