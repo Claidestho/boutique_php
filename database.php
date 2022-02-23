@@ -93,7 +93,7 @@ SELECT *
 FROM carriers
 ');
     $function_result->execute();
-    $result = $function_result->fetchAll();
+    $result = $function_result->fetchAll(PDO::FETCH_ASSOC);
     return $result;
 
 }

@@ -9,13 +9,13 @@ include_once './class/catalog.php';
 
 <?php
 try {
-    $db = new PDO('mysql:host=127.0.0.1;dbname=test;charset=utf8', 'root', '', [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+    $db = new PDO('mysql:host=127.0.0.1;dbname=boutique_php;charset=utf8', 'root', '', [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
 } catch (Exception $e) {
     die('Erreur : ' . $e->getMessage());
 }
-//echo "<pre>";
-//var_dump($_SESSION);
-//echo "</pre>";
+echo "<pre>";
+var_dump($_SESSION);
+echo "</pre>";
 
 $products = displayAllProducts($db);
 
@@ -110,4 +110,4 @@ echo '<br>';
     <!--            </div>-->
     <!---->
     <!---->
-    <!--        --><?php //} ?>
+    <!--        --><?php session_destroy(); ?>

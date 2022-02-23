@@ -6,12 +6,12 @@ class Catalog {
     public function __construct()
     {
         try {
-        $db = new PDO('mysql:host=127.0.0.1;dbname=test;charset=utf8', 'root', '', [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+        $db = new PDO('mysql:host=127.0.0.1;dbname=boutique_php;charset=utf8', 'root', '', [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
     } catch (Exception $e) {
         die('Erreur : ' . $e->getMessage());
     }
 
-    $catalog = $db->prepare('SELECT * FROM products');
+    $catalog = $db->prepare('SELECT * FROM products LIMIT 3');
     $catalog->execute();
     $this->items = $catalog->fetchAll(PDO::FETCH_ASSOC);
     }

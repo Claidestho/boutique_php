@@ -6,19 +6,32 @@ include_once 'database.php';
 include_once 'carrier-list.php';
 
 try {
-    $db = new PDO('mysql:host=127.0.0.1;dbname=test;charset=utf8', 'root', '', [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+    $db = new PDO('mysql:host=127.0.0.1;dbname=boutique_php;charset=utf8', 'root', '', [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
 } catch (Exception $e) {
     die('Erreur : ' . $e->getMessage());
 }
 
 $_SESSION = array_merge($_SESSION, $_POST);
 
+$_SESSION['weight'] = 500;
+$noProducts = 0;
+
+foreach ($_SESSION['quantity'] as $amount) {
+    if ($amount > 0) {
+        $noProducts = $noProducts + 1;
+    }
+}
+
+echo "<pre>";
+var_dump($noProducts);
+echo "</pre>";
+
+
 echo "<pre>";
 var_dump($_SESSION);
 echo "</pre>";
 $subTotal = 0;
 $totalWeight = 0;
-
 
 
 //echo "<pre>";
@@ -56,42 +69,48 @@ $totalWeight = 0;
         h3 {
             text-align: center;
         }
+
+        th {
+            text-align: center;
+        }
+
+
     </style>
     <h1>Récapitulatif de votre commande</h1>
-    <!--    <pre><b>--><?php //var_dump($_POST); ?><!--</b></pre>-->
+<?php if ($noProducts) { ?>
     <p>Voici les détails de votre commande n°<?= rand(10000, 99999) ?> du <?= date("d.m.y") . " à " . date("H:i:s") ?>
         :</p>
 
-<?php
+    <?php
 
-$results = [];
-$q = [];
+    $results = [];
+    $q = [];
 
-for ($i = 0; $i < count($_POST['quantity']); $i++) {
-    $results[] = dbExtractProduct($db, $_POST['id'][$i]);
-    if ($_POST['quantity'][$i] > 0) {
-        $q[] = $_POST['quantity'][$i];
+    for ($i = 0; $i < count($_SESSION['quantity']); $i++) {
+        $results[] = dbExtractProduct($db, $_SESSION['id'][$i]);
+        if ($_SESSION['quantity'][$i] > 0) {
+            $q[] = $_SESSION['quantity'][$i];
+        }
     }
-}
 
 
-?>
+    ?>
     <div class="table">
-        <table>
-            <thead>
-            <tr>
-                <th colspan="2">Récapitulatif de votre commande</th>
-            </tr>
-            </thead>
-            <tbody>
+    <table>
+    <thead>
+    <tr>
+        <th colspan="2">Récapitulatif de votre commande</th>
+    </tr>
+    </thead>
+    <tbody>
 
-            <?php if(isset($_SESSION['quantity'])){
-            foreach ($results as $key => $result) { ?>
-            <?php if($_POST["quantity"][$key] > 0){ ?>
+    <?php if (isset($_SESSION['quantity'])) {
+        foreach ($results as $key => $result) { ?>
+            <?php if ($_SESSION["quantity"][$key] > 0) { ?>
                 <tr>
                     <td><b>Produit commandé</b></td>
-                    <td><?php if (!empty($_POST)) {
-                            echo "<b>". ucfirst($result['name']) . "</b>";
+                    <td><?php if ($noProducts) {
+                            echo "<b>" . ucfirst($result['name']) . "</b>";
                         } else {
                             echo "ERREUR : LE PRODUIT CHOISI N'EST PAS VALIDE";
                         } ?>
@@ -100,8 +119,8 @@ for ($i = 0; $i < count($_POST['quantity']); $i++) {
                 </tr>
                 <tr>
                     <td>Quantité</td>
-                    <td><?php if (filter_var($_POST["quantity"][$key], FILTER_VALIDATE_INT)) {
-                            echo $_POST["quantity"][$key];
+                    <td><?php if (filter_var($_SESSION["quantity"][$key], FILTER_VALIDATE_INT)) {
+                            echo $_SESSION["quantity"][$key];
                         } else {
                             echo "ERREUR : LA QUANTITÉ INDIQUÉE N'EST PAS VALIDE";
                         } ?>
@@ -112,7 +131,7 @@ for ($i = 0; $i < count($_POST['quantity']); $i++) {
 
                 <tr>
                     <td>Remise (%)</td>
-                    <td><?php if (!empty($_POST)) {
+                    <td><?php if ($noProducts) {
                             echo $result["discount_rate"] . "%";
                         } else {
                             echo "ERREUR";
@@ -123,12 +142,12 @@ for ($i = 0; $i < count($_POST['quantity']); $i++) {
 
                 <tr>
                     <td>Prix HT unitaire</td>
-                    <td><?php if (!empty($_POST)) {
-                            formatPrice(priceExcludingVAT(discountedPrice($result["price"], $result["discount_rate"]) * $_POST["quantity"][$key]));
+                    <td><?php if (!empty($_SESSION)) {
+                            echo formatPrice(priceExcludingVAT(discountedPrice($result["price"], $result["discount_rate"]) * $_SESSION["quantity"][$key]));
                         } else {
                             echo "ERREUR";
                         }
-                        $subTotal = $subTotal + (discountedPrice($result["price"], $result["discount_rate"]) * $_POST["quantity"][$key]);
+                        $subTotal = $subTotal + (discountedPrice($result["price"], $result["discount_rate"]) * $_SESSION["quantity"][$key]);
                         $totalWeight = $totalWeight + $result["weight"];
 
                         ?><input type="hidden" name="price" value="<?php $result["price"] ?>">
@@ -136,30 +155,38 @@ for ($i = 0; $i < count($_POST['quantity']); $i++) {
                     </td>
                 </tr>
 
-            <?php } } ?>
+            <?php }
+        } ?>
 
-            <tr>
-                <td>TVA</td>
-                <td><?= "20%" ?>
-                </td>
-            </tr>
-                <tr>
-                    <td><b>Sous total TTC</b></td>
-                    <td><b><?php
-                        echo formatPrice($subTotal);
-                        ?></b>
-                    </td>
-                </tr>
-            </tbody>
+        <tr>
+            <td>TVA</td>
+            <td><?= "20%" ?>
+            </td>
+        </tr>
+        <tr>
+            <td><b>Sous total TTC</b></td>
+            <td><b><?php
+                    echo formatPrice($subTotal);
+                    ?></b>
+            </td>
+        </tr>
+        </tbody>
         </table>
-    </div>
+        </div>
 
 
-<?php }
+    <?php }
+} else {
+    echo "<h2>Erreur : Vous n'avez pas sélectionné de produit.</h2>";
+}
 
 $carriers = displayCarriers($db);
 
-if (!empty($results)) { ?>
+echo "<pre>";
+var_dump($carriers);
+echo "</pre>";
+
+if ($noProducts) { ?>
     <h3>Choix du transporteur :</h3>
 
     <form method="POST">
@@ -173,57 +200,80 @@ if (!empty($results)) { ?>
             ?>>
         </select>
         <input type="hidden" name="weight" value="<?= $totalWeight ?>">
-        <input type="hidden" value="<?php $_POST ?>">
+
         <input type="submit" value="Valider">
     </form><br>
 
     <div class="table">
+        <form method="POST" action="thanks.php">
+            <table>
+                <thead>
+                <tr>
+                    <th colspan="2">Choix du mode de livraison</th>
+                </tr>
+                </thead>
+                <tr>
+                    <?php if (isset($_SESSION["carrier"])) { ?>
+                    <td>Transporteur</td>
+                    <td>
+                        <?php
+                        echo $carriers[$_SESSION['carrier']]['name'];
+                        ?>
+                    </td>
+                </tr>
+                <?php }else{?>
+                <tr>
+                    <td>Transporteur</td>
+                    <td>
+                       Veuillez choisir une transporteur dans la liste ci-dessus.
+                    </td>
+                </tr>
+                <?php } ?>
+                <tr>
+                    <td>Frais de port</td>
 
-        <table>
-            <thead>
-            <tr>
-                <th colspan="2">Choix du mode de livraison</th>
-            </tr>
-            </thead>
-            <td>Frais de port</td>
-            <td>
-                <?php
-                if (isset($_POST["carrier"])) {
-                    if ($_POST['weight'] <= 500) {
-                        echo $carriers[$_POST['carrier']];
-                        $totalPrice = $carriers[$_POST["carrier"]]["price_500"];
-                    } elseif ($_POST['weight'] <= 2000) {
-                        formatPrice(deliveryFees($carriers[$_POST["carrier"]]["price_500"]));
-                        $totalPrice = $carriers[$_POST["carrier"]]["price_2000"];
-                    } elseif ($_POST['weight'] > 2001) {
-                        echo $carriers[$_POST["carrier"]]["price_over"];
-                        $totalPrice = $carriers[$_POST["carrier"]]["price_over"];
-                    }
-                } else {
-                    echo "Veuillez choisir un transporteur dans la liste ci-dessus";
-                }
-                ?>
+                    <td>
+                        <?php
+                        if (isset($_SESSION["carrier"])) {
+                            if ($_SESSION['weight'] <= 500) {
+                                echo formatPrice($carriers[$_SESSION['carrier']]['price_500']);
+                                $totalPrice = $carriers[$_SESSION["carrier"]]["price_500"];
+                            } elseif ($_SESSION['weight'] <= 1000) {
+                                echo formatPrice($carriers[$_SESSION['carrier']]['price_1000']);
+                                $totalPrice = $carriers[$_SESSION['carrier']]['price_1000'];
+                            } elseif ($_SESSION['weight'] > 1001) {
+                                echo formatPrice($carriers[$_SESSION['carrier']]['price_over']);
+                                $totalPrice = $carriers[$_SESSION['carrier']]['price_over'];
+                            }
+                        } else {
+                            echo "Veuillez choisir un transporteur dans la liste ci-dessus";
+                        }
+                        ?>
 
-            </td>
-            </tr>
-            <td>Prix total TTC</td>
-            <td><?php
-                if (isset($_POST["carrier"]) && !is_string($totalPrice) && isset($_POST["quantity"])) {
-                    echo formatPrice(discountedPrice($products[$_POST["product"]]["price"], $products[$_POST["product"]]["discount_rate"]) * $_POST["quantity"] + $totalPrice);
-                } elseif (isset($_POST["carrier"]) && is_string($totalPrice) && isset($_POST["quantity"])) {
+                    </td>
+                </tr>
+                <tr>
+                    <td>Prix total TTC</td>
+                    <td><?php
+                        if (isset($_SESSION["carrier"]) && !is_string($totalPrice) && isset($_SESSION["quantity"])) {
+                            echo formatPrice(discountedPrice($results[$_POST["product"]]["price"], $results[$_POST["product"]]["discount_rate"]) * $_POST["quantity"] + $totalPrice);
+                        } elseif (isset($_POST["carrier"]) && is_string($totalPrice) && isset($_POST["quantity"])) {
 
-                    echo formatPrice(discountedPrice($products[$_POST["product"]]["price"], $products[$_POST["product"]]["discount_rate"]) * $_POST["quantity"]);
-                } else {
-                    echo "Veuillez choisir un transporteur dans la liste ci-dessus";
-                }
-                ?>
+                            echo formatPrice(discountedPrice($results[$_POST["product"]]["price"], $results[$_POST["product"]]["discount_rate"]) * $_POST["quantity"]);
+                        } else {
+                            echo "Veuillez choisir un transporteur dans la liste ci-dessus";
+                        }
+                        ?>
 
 
-            </td>
-            </tr>
-            </tbody>
-        </table>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <input type="submit" value="Valider commande">
     </div>
+
+    </form>
 <?php } ?>
 
 <?php include './exo-template/footer.php' ?>
