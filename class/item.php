@@ -11,7 +11,9 @@ class Item
     protected int $avalaible = 0;
     protected int $discount_rate;
     protected int $id;
+public function __construct(){
 
+}
     /**
      * @return string
      */

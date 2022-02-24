@@ -75,7 +75,32 @@ function insertNewCustomer($database, $price, $name, $avalaible, $description, $
     $function_result->execute();
 }
 
-function dbExtractProduct($database, $id){
+function insertNewOrder($database, $date, $customerId, $number)
+{
+    $insertOrder = $database->prepare('INSERT INTO `orders` (date, customer_id, number) VALUES (:date, :customer_id, :number)');
+    $insertOrder->bindParam('date', $date, PDO::PARAM_STR_CHAR);
+    $insertOrder->bindParam('customer_id', $customerId, PDO::PARAM_INT);
+    $insertOrder->bindParam('number', $number, PDO::PARAM_STR_CHAR);
+    $insertOrder->execute();
+    return $database->lastInsertId();
+
+}
+
+function insertOrderProduct($database, $qty, $productId, $date, $customerId, $number)
+{
+    $orderId = insertNewOrder($database, $date, $customerId, $number);
+    $insert = $database->prepare('
+INSERT INTO `order_product` (product_id, quantity, order_id)
+VALUES (:product_id, :qty, :order_id)
+');
+    $insert->bindParam('product_id', $productId, PDO::PARAM_INT);
+    $insert->bindParam('qty', $qty, PDO::PARAM_INT);
+    $insert->bindParam('order_id', $orderId, PDO::PARAM_INT);
+    $insert->execute();
+}
+
+function dbExtractProduct($database, $id)
+{
     $function_result = $database->prepare('
 SELECT *
 FROM products
@@ -87,7 +112,8 @@ WHERE id = :identifier
 
 }
 
-function displayCarriers($database){
+function displayCarriers($database)
+{
     $function_result = $database->prepare('
 SELECT *
 FROM carriers
@@ -98,7 +124,8 @@ FROM carriers
 
 }
 
-function createOrder($database, $quantity, $order_id, $product_id){
+function createOrder($database, $quantity, $order_id, $product_id)
+{
     $function_result = $database->prepare('INSERT INTO `order_product` (product_id, quantity, order_id) VALUES (:product_id, :quantity, :order_id)');
     $function_result->bindParam('quantity', $quantity, PDO::PARAM_INT);
     $function_result->bindParam('order_id', $order_id, PDO::PARAM_INT);

@@ -11,7 +11,12 @@ try {
     die('Erreur : ' . $e->getMessage());
 }
 
+
 $_SESSION = array_merge($_SESSION, $_POST);
+
+echo "<pre>";
+var_dump($_SESSION);
+echo "</pre>";
 
 $_SESSION['weight'] = 500;
 $noProducts = 0;
@@ -23,16 +28,8 @@ foreach ($_SESSION['quantity'] as $amount) {
 }
 
 
-//echo "<pre>";
-//var_dump($_SESSION);
-//echo "</pre>";
 $subTotal = 0;
 $totalWeight = 0;
-
-
-//echo "<pre>";
-//var_dump($_POST);
-//echo "</pre>";
 
 
 ?>
@@ -88,6 +85,7 @@ $totalWeight = 0;
 
     for ($i = 0; $i < count($_SESSION['quantity']); $i++) {
         $results[] = dbExtractProduct($db, $_SESSION['id'][$i]);
+
         if ($_SESSION['quantity'][$i] > 0) {
             $q[] = $_SESSION['quantity'][$i];
         }
@@ -110,6 +108,8 @@ $totalWeight = 0;
                 <tr>
                     <td><b>Produit commandé</b></td>
                     <td><?php if ($noProducts) {
+                            $id = $result['id'];
+//                            $formData[$key]['id'] = $result['id'];
                             echo "<b>" . ucfirst($result['name']) . "</b>";
                         } else {
                             echo "ERREUR : LE PRODUIT CHOISI N'EST PAS VALIDE";
@@ -121,6 +121,8 @@ $totalWeight = 0;
                     <td>Quantité</td>
                     <td><?php if (filter_var($_SESSION["quantity"][$key], FILTER_VALIDATE_INT)) {
                             echo $_SESSION["quantity"][$key];
+                            $qty = $_SESSION["quantity"][$key];
+//                            $formData[$key]['qty'] = $_SESSION["quantity"][$key];
                         } else {
                             echo "ERREUR : LA QUANTITÉ INDIQUÉE N'EST PAS VALIDE";
                         } ?>
@@ -182,9 +184,6 @@ $totalWeight = 0;
 
 $carriers = displayCarriers($db);
 
-//echo "<pre>";
-//var_dump($carriers);
-//echo "</pre>";
 
 if ($noProducts) { ?>
     <h3>Choix du transporteur :</h3>
@@ -221,13 +220,13 @@ if ($noProducts) { ?>
                         ?>
                     </td>
                 </tr>
-                <?php }else{?>
-                <tr>
-                    <td>Transporteur</td>
-                    <td>
-                       Veuillez choisir une transporteur dans la liste ci-dessus.
-                    </td>
-                </tr>
+                <?php } else { ?>
+                    <tr>
+                        <td>Transporteur</td>
+                        <td>
+                            Veuillez choisir une transporteur dans la liste ci-dessus.
+                        </td>
+                    </tr>
                 <?php } ?>
                 <tr>
                     <td>Frais de port</td>
@@ -255,18 +254,27 @@ if ($noProducts) { ?>
                 <tr>
                     <td class="total"><b>Prix total TTC</b></td>
                     <td class="total"><b><?php
-                        if (isset($_SESSION["carrier"]) && !is_string($totalPrice) && isset($_SESSION["quantity"])) {
-                            echo formatPrice($subTotal + $totalPrice);
-                        } else {
-                            echo "Veuillez choisir un transporteur dans la liste ci-dessus";
-                        }
-                        ?></b>
+                            if (isset($_SESSION["carrier"]) && !is_string($totalPrice) && isset($_SESSION["quantity"])) {
+                                echo formatPrice($subTotal + $totalPrice);
+                            } else {
+                                echo "Veuillez choisir un transporteur dans la liste ci-dessus";
+                            }
+                            ?></b>
 
 
                     </td>
                 </tr>
                 </tbody>
             </table>
+
+<!--            --><?php
+//            echo "<pre>";
+//            var_dump($formData);
+//            echo "</pre>";
+//            ?>
+
+            <input type="hidden" name="id" value="<?= $id ?>">
+            <input type="hidden" name="qty" value="<?= $qty ?>">
             <input type="submit" value="Valider commande">
     </div>
 

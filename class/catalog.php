@@ -11,7 +11,7 @@ class Catalog {
         die('Erreur : ' . $e->getMessage());
     }
 
-    $catalog = $db->prepare('SELECT * FROM products LIMIT 3');
+    $catalog = $db->prepare('SELECT * FROM products LIMIT 6');
     $catalog->execute();
     $this->items = $catalog->fetchAll(PDO::FETCH_ASSOC);
     }
